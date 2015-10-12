@@ -12,11 +12,12 @@
    :headers {"Content-Type" "text/html"}
    :body "Hello, world"})
 
-(defrecord WebServer [conf handler]
+(defrecord WebServer [conf handler db]
   c/Lifecycle
   (start [c]
     (let [conf (merge default-server-config conf)
-          handler (m/create-from-conf #'r/app conf)]
+          m-conf (assoc conf :connection-source db)
+          handler (m/create-from-conf #'r/app m-conf)]
       (log/info "Start WebServer:" (:port conf))
       (assoc c :server (web/run handler conf))))
 

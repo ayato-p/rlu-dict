@@ -16,13 +16,13 @@
                  [com.stuartsierra/component "0.3.0"] ;; Component
                  [com.taoensso/timbre "4.1.4"] ;; Logging
 
-
                  ;; Middlewares
                  [ring/ring-defaults "0.1.5"]
 
                  ;; Misc
                  [potemkin "0.4.1"]
-                 [metosin/ring-http-response "0.6.5"]]
+                 [metosin/ring-http-response "0.6.5"]
+                 [prismatic/schema "1.0.1"]]
   :main rlu_dict.main
   :uberjar-name "rlu-dict-standalone.jar"
   :profiles
@@ -31,5 +31,9 @@
 
    :dev
    {:source-paths ["env/dev/clj"]
-    :dependencies [[ring/ring-devel "1.4.0"]]
-    :repl-options {:init-ns rlu-dict.repl}}})
+    :dependencies [[ring/ring-devel "1.4.0"]
+                   [clj-liquibase "0.5.3"]]
+    :plugins [[lein-exec "0.3.5"]]
+    :repl-options {:init-ns rlu-dict.repl}
+    :aliases {"migrate" ["do"
+                         ["exec" "-p" "etc/migration.clj"]]}}})

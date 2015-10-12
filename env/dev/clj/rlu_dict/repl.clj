@@ -7,6 +7,7 @@
             [clojure.test :as test]
             [clojure.tools.namespace.repl :refer (refresh refresh-all)]
             [com.stuartsierra.component :as c]
+            [rlu-dict.db :as db]
             [rlu-dict.system :as system]))
 
 (defn- config-reader []
@@ -14,20 +15,15 @@
 
 (def system nil)
 
-(defn start
-  "Starts the current development system."
+(defn go
   []
-  (system/boot #'system (config-reader)))
+  (system/boot #'system (config-reader))
+  (alter-var-root #'db/*connection-source* (constantly nil)))
 
 (defn stop
-  "Shuts down and destroys the current development system."
   []
-  (system/shutdown #'system))
-
-(defn go
-  "Initializes the current development system and starts it running."
-  []
-  (start))
+  (system/shutdown #'system)
+  (alter-var-root #'db/*connection-source* (constantly (:db system))))
 
 (defn reset []
   (stop)
