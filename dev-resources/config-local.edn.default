@@ -1,0 +1,10 @@
+{:db
+ {:vendor   "postgresql"
+  :name     "rlu_dict_dev"
+  :host     "localhost"
+  :port     5433
+  :user     "username"
+  :password "password"}
+
+ :webserver
+ {:port 8000}}

@@ -2,6 +2,43 @@
  逆引き Clojure
 ================
 
+このプロジェクトは過去にあった同名サービスの置き換えです。
+
+Requirements
+============
+
+開発には以下のものが必要です。
+
+* Java 8
+* Leiningen 2.5.2 or higher
+* PostgreSQL 9.4.5 or higher
+
+Developer's Guide
+=================
+
+設定
+----
+
+開発環境用の設定ファイルを作ります。
+
+`/dev-resources/config-local.edn.default` を `/dev-resources/config-local.edn` とすることで開発環境下ではそれが使われます。
+
+マイグレーション
+----------------
+
+.. sourcecode:: clojure
+
+  $ lein migrate
+
+サーバー起動
+------------
+
+.. sourcecode:: clojure
+
+  $ lein repl
+
+  (go)
+
 License
 =======
 
