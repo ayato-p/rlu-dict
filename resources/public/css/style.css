@@ -1,0 +1,7 @@
+.top-bar {
+    padding: 5px;
+}
+
+a, .no-deco {
+    text-decoration: none;
+}

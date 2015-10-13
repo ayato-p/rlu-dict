@@ -18,12 +18,12 @@
 (defn go
   []
   (system/boot #'system (config-reader))
-  (alter-var-root #'db/*connection-source* (constantly nil)))
+  (alter-var-root #'db/*connection-source* (constantly (:db system))))
 
 (defn stop
   []
   (system/shutdown #'system)
-  (alter-var-root #'db/*connection-source* (constantly (:db system))))
+  (alter-var-root #'db/*connection-source* (constantly nil)))
 
 (defn reset []
   (stop)

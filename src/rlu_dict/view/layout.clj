@@ -8,5 +8,3 @@
   [req & {:keys [content]}]
   [:title] (html/content service-name)
   [:#content] (html/content content))
-
-(main-layout {})

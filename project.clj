@@ -18,8 +18,10 @@
 
                  ;; Middlewares
                  [ring/ring-defaults "0.1.5"]
+                 [ring/ring-devel "1.4.0"]
 
                  ;; Misc
+                 [inflections "0.9.14"]
                  [potemkin "0.4.1"]
                  [metosin/ring-http-response "0.6.5"]
                  [prismatic/schema "1.0.1"]]
@@ -31,8 +33,7 @@
 
    :dev
    {:source-paths ["env/dev/clj"]
-    :dependencies [[ring/ring-devel "1.4.0"]
-                   [clj-liquibase "0.5.3"]]
+    :dependencies [[clj-liquibase "0.5.3"]]
     :plugins [[lein-exec "0.3.5"]]
     :repl-options {:init-ns rlu-dict.repl}
     :aliases {"migrate" ["do"
