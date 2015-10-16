@@ -18,7 +18,8 @@
    :member
    [[:id         :int           :null false :pk true :autoinc true]
     [:name       [:varchar 255] :null false]
-    [:password   [:varchar 255] :null false]
+    [:github-id  :bigint        :null false]
+    [:icon-img   :text          :null true]
     [:created-at :datetime      :null false]
     [:updated-at :datetime      :null false]]))
 
@@ -64,6 +65,9 @@
 (def create-index-member
   (ch/create-index :member [:id]))
 
+(def create-index-github-id
+  (ch/create-index :member [:github-id]))
+
 (def create-index-recipe
   (ch/create-index :recipe [:id]))
 
@@ -82,6 +86,7 @@
                                            create-table-category
                                            create-table-recipe-category
                                            create-index-member
+                                           create-index-github-id
                                            create-index-recipe
                                            create-index-request
                                            create-index-category

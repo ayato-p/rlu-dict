@@ -26,7 +26,7 @@
 
 (defn execute
   ([q]
-   (execute q {:returning :all}))
+   (execute q {}))
   ([q opt]
    (let [qs (if (string? q) q (sf/format q {}))]
      (with-connection-dwim

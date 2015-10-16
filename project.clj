@@ -25,7 +25,9 @@
                  [potemkin "0.4.1"]
                  [metosin/ring-http-response "0.6.5"]
                  [prismatic/schema "1.0.1"]
-                 [markdown-clj "0.9.74"]]
+                 [markdown-clj "0.9.74"]
+                 [clj-http "1.1.2"]
+                 [cheshire "5.5.0"]]
   :main rlu_dict.main
   :uberjar-name "rlu-dict-standalone.jar"
   :profiles
