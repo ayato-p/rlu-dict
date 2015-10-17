@@ -17,11 +17,14 @@
       res/html))
 
 (defn auth-callback [req]
-  (let [session (:session req)
-        token (gc/access-token req)]
-    (-> (m/find-or-save-member (gc/me token))
-        prn-str
-        res/ok
+  (let [member (-> req
+                   gc/access-token
+                   gc/me
+                   m/find-or-save-member)
+        session (:session req)
+        updated (assoc session :identity member)]
+    (-> (res/found "/")
+        (assoc :session updated)
         res/html)))
 
 (defroutes main-routes

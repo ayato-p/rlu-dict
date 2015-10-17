@@ -21,6 +21,7 @@
                  [ring/ring-devel "1.4.0"]
 
                  ;; Misc
+                 [buddy/buddy-auth "0.7.1"]
                  [inflections "0.9.14"]
                  [potemkin "0.4.1"]
                  [metosin/ring-http-response "0.6.5"]

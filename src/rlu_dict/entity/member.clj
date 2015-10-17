@@ -22,7 +22,7 @@
 (defn find-member [& [where-clause]]
   (-> (s/select :*)
       (s/from :member)
-      (s/where (if where-clause where-clause '(= 1 1)))
+      (s/where (or where-clause '(= 1 1)))
       db/fetch))
 
 (defn find-first-member [& [where-clause]]
