@@ -15,11 +15,3 @@
            [:li [:a {:href "/recipe"} "逆引きレシピ一覧"]]])
          html/html
          (layout/main-layout req :content)))
-
-(defn login [req]
-  (->> (list
-        [:span "GitHub へとリダイレクトしてます…"]
-        [:meta {:http-equiv "refresh"
-                :content (str/join ";"["0" (str "URL=" (gc/generate-auth-url req))])}])
-       html/html
-       (layout/main-layout req :content)))

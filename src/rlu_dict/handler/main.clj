@@ -11,10 +11,12 @@
       res/ok
       res/html))
 
-(defn login [req]
-  (-> (view/login req)
-      res/ok
-      res/html))
+(defn logout [req]
+  (let [session (:session req)
+        dissoced (dissoc session :identity)]
+    (-> (res/found "/")
+        (assoc :session dissoced)
+        res/html)))
 
 (defn auth-callback [req]
   (let [member (-> req
@@ -29,5 +31,5 @@
 
 (defroutes main-routes
   (GET "/" [req] #'home)
-  (GET "/login" [req] #'login)
+  (GET "/logout" [req] #'logout)
   (GET "/auth-callback" [req] #'auth-callback))
