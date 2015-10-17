@@ -1,7 +1,17 @@
-.top-bar {
-    padding: 5px;
+body {
+    font-family: "Hiragino Kaku Gothic ProN", 'メイリオ', Meiryo, sans-serif;
 }
 
-a, .no-deco {
+.top-bar {
+    padding: 10px 5px;
+}
+
+a {
     text-decoration: none;
+}
+
+img.avatar {
+    width: 24px;
+    heihgt: 24px;
+    margin-right: 5px;
 }

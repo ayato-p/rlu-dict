@@ -7,7 +7,7 @@
 
 (defn menu [req]
   (-> (if-let [member (current-member req)]
-        [:a {:href "/logout"} "ログアウト"]
+        [:a {:href "/logout"} [:img.avatar {:src (str (:icon-img member))} ] "ログアウト"]
         [:a {:href (gc/generate-auth-url req)} "ログイン"])
       html/html))
 
