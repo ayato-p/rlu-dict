@@ -5,10 +5,14 @@
 
 (def service-name "逆引き Clojure")
 
+(def menu-spec)
+
 (defn menu [req]
   (-> (if-let [member (current-member req)]
-        [:a {:href "/logout"} [:img.avatar {:src (str (:icon-img member))} ] "ログアウト"]
-        [:a {:href (gc/generate-auth-url req)} "ログイン"])
+        (list
+         [:li [:a {:href "/recipe/new"} [:i.icon.ion-plus-round]]]
+         [:li [:a {:href "/logout"} [:img.avatar {:src (str (:icon-img member))} ] "ログアウト"]])
+        [:li [:a {:href (gc/generate-auth-url req)} "ログイン"]])
       html/html))
 
 (html/deftemplate main-layout

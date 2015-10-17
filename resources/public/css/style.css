@@ -10,8 +10,22 @@ a {
     text-decoration: none;
 }
 
+a.brand {
+    display: inline-block;
+}
+
 img.avatar {
     width: 24px;
     heihgt: 24px;
     margin-right: 5px;
+}
+
+ul.menu {
+    display: inline-block;
+    list-style-type: none;
+}
+
+ul.menu > li {
+    display: inline;
+    padding: 0 5px;
 }

@@ -13,7 +13,7 @@
        html/html
        (layout/main-layout req :content)))
 
-(def recipe-form
+(defn recipe-form []
   [:form {:action "/recipe/new" :method "post"}
    (vu/anti-forgery-field)
    [:input.full-width {:name "title"}]
@@ -23,6 +23,6 @@
 (defn new [req]
   (->> [:section.panel
         [:header.bg-light-blue "Recipe new"]
-        [:main recipe-form]]
+        [:main (recipe-form)]]
        html/html
        (layout/main-layout req :content)))
