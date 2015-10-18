@@ -30,6 +30,6 @@
         res/html)))
 
 (defroutes main-routes
-  (GET "/" [req] #'home)
-  (GET "/logout" [req] #'logout)
-  (GET "/auth-callback" [req] #'auth-callback))
+  (GET "/" [req] home)
+  (GET "/logout" [req] logout)
+  (GET "/auth-callback" [req] auth-callback))

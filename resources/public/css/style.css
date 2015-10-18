@@ -3,7 +3,7 @@ body {
 }
 
 .top-bar {
-    padding: 10px 5px;
+    padding: 10px;
 }
 
 a {
@@ -28,4 +28,8 @@ ul.menu {
 ul.menu > li {
     display: inline;
     padding: 0 5px;
+}
+
+textarea.content {
+    height: 25em;
 }

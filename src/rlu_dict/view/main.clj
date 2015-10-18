@@ -7,7 +7,7 @@
             [rlu-dict.view.layout :as layout]))
 
 (defn home [req]
-  (->> (uv/parse-markdown "```clojure\n(defn hello [] \"Hello,world\")\n```")
+  (->> (uv/parse-markdown "```clojure\n(defn hello [] \"逆引き Clojure\")\n```")
        (layout/main-layout req :content))
   #_(->> (list
           [:h1 "Welcome!!"]

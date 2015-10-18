@@ -1,7 +1,8 @@
 (ns rlu-dict.db
   (:require [clojure.string :as str]
-            [jdbc.core :as jdbc]
             [inflections.core :as inf]
+            [jdbc.core :as jdbc]
+            [jdbc.resultset :refer [result-set->vector]]
             [stch.sql.format :as sf]))
 
 (def ^:dynamic *connection-source*)
@@ -26,11 +27,16 @@
 
 (defn execute
   ([q]
-   (execute q {}))
+   (execute q {:returning :all}))
   ([q opt]
    (let [qs (if (string? q) q (sf/format q {}))]
      (with-connection-dwim
-       (jdbc/execute *connection* qs opt)))))
+       (with-open [stmt (jdbc/prepared-statement *connection* qs opt)]
+         (.executeUpdate stmt)
+         ;; bit complex?
+         (if (:returning opt)
+           (let [rs (.getGeneratedKeys stmt)]
+             (result-set->vector *connection* rs {}))))))))
 
 (defn fetch
   ([q]

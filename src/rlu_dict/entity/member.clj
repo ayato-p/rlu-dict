@@ -35,11 +35,11 @@
               (dissoc :id))]
     (-> (s/insert-into :member)
         (s/values [m])
-        db/execute)))
+        db/execute
+        first)))
 
 (defn find-or-save-member [m]
   (let [where-clause `(= github-id ~(:github-id m))]
     (if-let [member (find-first-member where-clause)]
       member
-      (when (save-member m)
-        (find-first-member where-clause)))))
+      (save-member m))))

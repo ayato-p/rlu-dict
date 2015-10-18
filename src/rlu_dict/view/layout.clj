@@ -10,9 +10,9 @@
 (defn menu [req]
   (-> (if-let [member (current-member req)]
         (list
-         [:li [:a {:href "/recipe/new"} [:i.icon.ion-plus-round]]]
-         [:li [:a {:href "/logout"} [:img.avatar {:src (str (:icon-img member))} ] "ログアウト"]])
-        [:li [:a {:href (gc/generate-auth-url req)} "ログイン"]])
+         [:li [:a {:href "/recipe/new" :title "新しく逆引きレシピを書く"} [:i.icon.ion-plus-round]]]
+         [:li [:a {:href "/logout" :title "ログアウトする"} [:img.avatar {:src (str (:icon-img member))} ] "ログアウト"]])
+        [:li [:a {:href (gc/generate-auth-url req) :title "ログインする"} "ログイン"]])
       html/html))
 
 (html/deftemplate main-layout
