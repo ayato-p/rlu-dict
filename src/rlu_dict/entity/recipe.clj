@@ -19,14 +19,20 @@
   {:pre [(map? m)]}
   (merge default-recipe (select-keys m (keys default-recipe))))
 
+(defn find-recipe* [& [where-clause]]
+  (-> (s/select :r.*)
+      (s/from [:recipe :r])
+      (s/where (or where-clause '(= 1 1)))))
+
 (defn find-recipe [& [where-clause]]
-  (-> (s/select :*)
-      (s/from :recipe)
-      (s/where (or where-clause '(= 1 1)))
+  (-> (find-recipe* where-clause)
       db/fetch))
 
 (defn find-first-recipe [& [where-clause]]
-  (first (find-recipe where-clause)))
+  (-> (find-recipe* where-clause)
+      (s/limit 1)
+      db/fetch
+      first))
 
 (defn save-recipe [m]
   (let [m (-> m

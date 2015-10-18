@@ -1,14 +1,18 @@
 (ns rlu-dict.handler.recipe
   (:require [compojure.core :refer [defroutes context GET POST]]
+            [rlu-dict.core.recipe :as core]
             [rlu-dict.entity.recipe :as recipe]
             [rlu-dict.security.auth :as auth]
             [rlu-dict.util.response :as res]
             [rlu-dict.view.recipe :as view]))
 
-(defn index [req]
-  (-> (view/index req [])
-      res/ok
-      res/html))
+(defn index [{:as req :keys [params]}]
+  (let [max-page (core/find-recipe-max-page)
+        current-page (or (Long/parseLong (:page params)) 1)
+        recipes (core/find-recipe-by-page current-page)]
+    (-> (view/index req recipes max-page current-page)
+        res/ok
+        res/html)))
 
 (defn show [{:as req :keys [params]}]
   (let [id (Long/parseLong (:id params) 10)

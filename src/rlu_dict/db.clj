@@ -45,3 +45,7 @@
    (let [qs (if (string? q) q (sf/format q {:quoting :postgresql}))]
      (with-connection-dwim
        (jdbc/fetch *connection* qs opt)))))
+
+(defn fetch-one
+  ([q] (first (fetch q)))
+  ([q opt] (first (fetch q opt))))

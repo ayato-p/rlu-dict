@@ -3,10 +3,18 @@
             [rlu-dict.util.view :as vu]
             [rlu-dict.view.layout :as layout]))
 
-(defn index [req recipes]
+(defn article [{:as recipe :keys [id title icon-img]}]
+  [:article
+   [:img.avatar {:src icon-img}]
+   [:span [:a {:href (str "/recipe/" id)} title]]])
+
+(defn index [req recipes max-page current-page]
   (->> [:section.panel
         [:header.bg-light-green "逆引きレシピ一覧"]
-        [:main]]
+        [:main
+         [:div#recipe-list
+          (for [r recipes] (article r))]
+         (vu/pager "/recipe" max-page current-page)]]
        html/html
        (layout/main-layout req :content)))
 
@@ -17,7 +25,7 @@
               [:main#recipe-content]]
              html/html
              (html/transform [:main#recipe-content] (html/content parsed)))
-         (layout/main-layout req :content))))
+         (layout/main-layout req :title title :content))))
 
 (defn recipe-form []
   [:form {:action "/recipe/new" :method "post"}
