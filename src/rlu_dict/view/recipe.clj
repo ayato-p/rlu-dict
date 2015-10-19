@@ -1,19 +1,22 @@
 (ns rlu-dict.view.recipe
   (:require [net.cgrand.enlive-html :as html]
+            [rlu-dict.util.time :as ut]
             [rlu-dict.util.view :as vu]
             [rlu-dict.view.layout :as layout]))
 
-(defn article [{:as recipe :keys [id title icon-img updated-at]}]
-  [:article
-   [:img.avatar {:src icon-img}]
-   [:span [:a {:href (str "/recipe/" id)} title]]
-   [:span.small updated-at]])
+(defn article [{:as recipe :keys [id title icon-img member-name updated-at]}]
+  [:article.recipe-table-row
+   [:div.table-cell-avatar
+    [:img.avatar {:src icon-img}]]
+   [:div.table-cell
+    [:span.status.small (str (ut/humanize updated-at) " に " member-name " が更新しました")]
+    [:span.body [:a {:href (str "/recipe/" id)} title]]]])
 
 (defn index [req recipes max-page current-page]
   (->> [:section.panel
         [:header.bg-light-green "逆引きレシピ一覧"]
         [:main
-         [:div#recipe-list
+         [:div.recipe-table
           (for [r recipes] (article r))]
          (vu/pager "/recipe" max-page current-page)]]
        html/html

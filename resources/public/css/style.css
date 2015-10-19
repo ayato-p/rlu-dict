@@ -41,3 +41,31 @@ textarea.content {
 .small {
     font-size: small;
 }
+
+.recipe-table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 0px 5px;
+}
+
+article.recipe-table-row {
+    display: table-row;
+}
+
+article.recipe-table-row > .table-cell-avatar {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+article.recipe-table-row > .table-cell-avatar > img.avatar {
+    width: 48px;
+    height: 48px;
+}
+
+article.recipe-table-row > .table-cell {
+    display: table-cell;
+}
+
+article.recipe-table-row > .table-cell > .status {
+    display: block;
+}
