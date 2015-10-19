@@ -25,6 +25,20 @@
      (do ~@body)
      (with-connection ~@body)))
 
+(defmacro atomic [& body]
+  (if (map? body)
+    `(with-connection-dwim
+       (let [conn# *connection*]
+         (jdbc/atomic conn# ~(first body)
+                      (binding [*connection* conn#]
+                        ~@(rest body)))))
+
+    `(with-connection-dwim
+       (let [conn# *connection*]
+         (jdbc/atomic conn#
+                      (binding [*connection* conn#]
+                        ~@body))))))
+
 (defn execute
   ([q]
    (execute q {:returning :all}))
@@ -36,7 +50,7 @@
          ;; bit complex?
          (if (:returning opt)
            (let [rs (.getGeneratedKeys stmt)]
-             (result-set->vector *connection* rs {}))))))))
+             (result-set->vector *connection* rs {:identifiers (comp str/lower-case inf/dasherize)}))))))))
 
 (defn fetch
   ([q]

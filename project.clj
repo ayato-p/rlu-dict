@@ -28,6 +28,7 @@
                  [prismatic/schema "1.0.1"]
                  [markdown-clj "0.9.74"]
                  [clj-http "1.1.2"]
+                 [clj-time "0.11.0"]
                  [cheshire "5.5.0"]]
   :main rlu_dict.main
   :uberjar-name "rlu-dict-standalone.jar"

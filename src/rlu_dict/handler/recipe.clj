@@ -8,8 +8,8 @@
 
 (defn index [{:as req :keys [params]}]
   (let [max-page (core/find-recipe-max-page)
-        current-page (or (Long/parseLong (:page params)) 1)
-        recipes (core/find-recipe-by-page current-page)]
+        current-page (Long/parseLong (get params :page "1"))
+        recipes (core/find-by-page current-page)]
     (-> (view/index req recipes max-page current-page)
         res/ok
         res/html)))
@@ -27,13 +27,9 @@
       res/html))
 
 (defn new-post [{:as req :keys [params]}]
-  (let [m (auth/current-member req)
-        recipe (-> params
-                   (assoc :member-id (:id m))
-                   recipe/make-recipe)]
-    (when-let [{:keys [id]} (recipe/save-recipe recipe)] ;; TODO error handling
-      (-> (res/found (str "/recipe/" id))
-          res/html))))
+  (when-let [{:keys [id]} (core/save-recipe req)] ;; TODO error handling
+    (-> (res/found (str "/recipe/" id))
+        res/html)))
 
 (defroutes recipe-routes
   (context "/recipe" []

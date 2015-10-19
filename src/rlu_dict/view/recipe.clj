@@ -3,10 +3,11 @@
             [rlu-dict.util.view :as vu]
             [rlu-dict.view.layout :as layout]))
 
-(defn article [{:as recipe :keys [id title icon-img]}]
+(defn article [{:as recipe :keys [id title icon-img updated-at]}]
   [:article
    [:img.avatar {:src icon-img}]
-   [:span [:a {:href (str "/recipe/" id)} title]]])
+   [:span [:a {:href (str "/recipe/" id)} title]]
+   [:span.small updated-at]])
 
 (defn index [req recipes max-page current-page]
   (->> [:section.panel

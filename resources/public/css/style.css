@@ -37,3 +37,7 @@ ul.menu > li {
 textarea.content {
     height: 25em;
 }
+
+.small {
+    font-size: small;
+}

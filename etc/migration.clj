@@ -49,7 +49,7 @@
   (ch/create-table
    :category
    [[:id         :int           :null false :pk true :autoinc true]
-    [:name       [:varchar 255] :null false]
+    [:name       [:varchar 255] :null false :unique true]
     [:created-at :datetime      :null false]
     [:updated-at :datetime      :null false]]))
 
