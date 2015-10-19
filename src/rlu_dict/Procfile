@@ -1,0 +1,1 @@
+web: java $JVM_OPT -jar target/rlu-dict-standalone.jar

@@ -11,6 +11,10 @@ body {
 }
 
 a {
+    text-decoration: underline;
+}
+
+a.no-deco {
     text-decoration: none;
 }
 

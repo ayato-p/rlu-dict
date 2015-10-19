@@ -2,6 +2,7 @@
   :description "Reverse lookup dictionary for Japanese Clojurians"
   :url "http://example.com/FIXME"
   :license {:name "MIT License"}
+  :min-lein-version "2.5.2"
   :source-paths ["src" "src-cljc"]
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [ring/ring-core "1.4.0"] ;; Ring
@@ -29,7 +30,8 @@
                  [markdown-clj "0.9.74"]
                  [clj-http "1.1.2"]
                  [clj-time "0.11.0"]
-                 [cheshire "5.5.0"]]
+                 [cheshire "5.5.0"]
+                 [environ "1.0.1"]]
   :main rlu_dict.main
   :uberjar-name "rlu-dict-standalone.jar"
   :profiles

@@ -28,3 +28,9 @@
 (defn reset []
   (stop)
   (refresh :after 'rlu-dict.repl/go))
+
+(defn drop-all-table! []
+  (let [sql "select table_name from information_schema.tables where table_schema = 'public'"
+        tables (mapcat vals (db/fetch sql))]
+    (doseq [t tables]
+      (db/execute (str "drop table " t) {}))))

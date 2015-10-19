@@ -3,6 +3,7 @@
             [clj-liquibase.cli :as cli]
             [clj-liquibase.core :refer [defchangelog]]
             [clojure.edn :as edn]
+            [environ.core :refer [env]]
             [jdbc.core :as jdbc]
             [rlu-dict.util.db :as ud]))
 
@@ -94,4 +95,6 @@
 
 (defchangelog app-changelog "rlu-dict" [changeset-1])
 
+
+(prn (make-datasource))
 (cli/entry "update" {:datasource (make-datasource) :changelog app-changelog})
