@@ -26,7 +26,7 @@
   (let [parsed (vu/parse-markdown content)]
     (->> (-> [:section.panel
               [:header.bg-light-green title]
-              [:main#recipe-content]]
+              [:main#recipe-content.word-wrap]]
              html/html
              (html/transform [:main#recipe-content] (html/content parsed)))
          (layout/main-layout req :title title :content))))

@@ -7,6 +7,7 @@
 (sc/defrecord Member
     [id         :- (sc/maybe sc/Int)
      name       :- sc/Str
+     login-name :- sc/Str
      github-id  :- sc/Int
      icon-img   :- (sc/maybe sc/Str)
      created-at :- sc/Inst

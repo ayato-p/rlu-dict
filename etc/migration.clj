@@ -19,6 +19,7 @@
    :member
    [[:id         :int           :null false :pk true :autoinc true]
     [:name       [:varchar 255] :null false]
+    [:login-name [:varchar 255] :null false]
     [:github-id  :bigint        :null false]
     [:icon-img   :text          :null true]
     [:created-at :datetime      :null false]

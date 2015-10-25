@@ -34,3 +34,18 @@
         tables (mapcat vals (db/fetch sql))]
     (doseq [t tables]
       (db/execute (str "drop table " t) {}))))
+
+(defn- rnd-str
+  ([] (rnd-str 8))
+  ([limit]
+   (let [num+alpha (concat (range (int \0) (inc (int \9)))
+                           (range (int \a) (inc (int \z)))
+                           (range (int \A) (inc (int \Z))))]
+     (->> (repeatedly limit #(rand-nth num+alpha))
+          (map char)
+          (clojure.string/join)))))
+
+(comment
+  (let [recipes (repeatedly 10000 #(rlu-dict.entity.recipe/make-recipe {:title (rnd-str 20) :content (rnd-str 500) :member-id 1}))]
+    (doseq [r recipes]
+      (rlu-dict.entity.recipe/save-recipe r))))

@@ -11,11 +11,9 @@
 
 (def ^:private access-token-url "https://github.com/login/oauth/access_token")
 
-{:html_url "https://github.com/ayato-p", :gravatar_id "", :followers_url "https://api.github.com/users/ayato-p/followers", :subscriptions_url "https://api.github.com/users/ayato-p/subscriptions", :site_admin false, :email "lumia[at]nandeger.com", :following_url "https://api.github.com/users/ayato-p/following{/other_user}", :hireable nil, :name "ayato_p", :type "User", :received_events_url "https://api.github.com/users/ayato-p/received_events", :login "ayato-p", :following 10, :updated_at "2015-10-16T12:48:32Z", :bio nil, :organizations_url "https://api.github.com/users/ayato-p/orgs", :id 1432156, :events_url "https://api.github.com/users/ayato-p/events{/privacy}", :url "https://api.github.com/users/ayato-p", :public_gists 61, :repos_url "https://api.github.com/users/ayato-p/repos", :public_repos 40, :starred_url "https://api.github.com/users/ayato-p/starred{/owner}{/repo}", :location "Tokyo, Japan", :blog "http://ayalog.com/", :followers 20, :company "Cybozu Startups, Inc.", :gists_url "https://api.github.com/users/ayato-p/gists{/gist_id}", :created_at "2012-02-13T02:59:10Z", :avatar_url "https://avatars.githubusercontent.com/u/1432156?v=3"}
-
 (defn- github-user->member [github-user]
   (-> github-user
-      (set/rename-keys {:id :github-id :avatar_url :icon-img})
+      (set/rename-keys {:id :github-id, :login :login-name, :avatar_url :icon-img})
       m/create-member))
 
 (defn generate-auth-url [req]
@@ -47,3 +45,14 @@
         :body
         (c/parse-string true)
         github-user->member)))
+
+(defn avatar-24
+  "This function dont control any url format error now."
+  [url]
+  (str url "&s=24"))
+
+(defn avatar-32 [url]
+  (str url "&s=32"))
+
+(defn avatar-48 [url]
+  (str url "&s=48"))
