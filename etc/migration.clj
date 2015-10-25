@@ -96,6 +96,4 @@
 
 (defchangelog app-changelog "rlu-dict" [changeset-1])
 
-
-(prn (make-datasource))
 (cli/entry "update" {:datasource (make-datasource) :changelog app-changelog})

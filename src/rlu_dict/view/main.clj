@@ -9,11 +9,11 @@
             [rlu-dict.view.recipe :refer [article]]))
 
 (defn top-contributors []
-  (let [contributors (core/top-contributors 30)]
+  (let [contributors (core/top-contributors 80)]
     [:section.panel
      [:header.bg-light-green "最も投稿しているユーザー"]
      [:main.top-contributors
-      (for [{:keys [login-name icon-img]} (repeat 80 (first contributors))]
+      (for [{:keys [login-name icon-img]} contributors]
         [:a {:href (str "/u/" login-name)}
          [:img.avatar {:src (gc/avatar-32 icon-img)}]])]]))
 
@@ -31,20 +31,14 @@
 (defn how-to-write []
   [:section.panel
    [:header.bg-light-green "書き方"]
-   [:main#markdown-ex
-    "foo"]])
+   [:main#markdown-ex]])
 
 (defn home [req]
-  (->> (-> (list
-            (top-contributors)
-            (resently-updated)
-            (how-to-write))
-           html/html
-           (html/transform [:main#markdown-ex] (html/content (uv/parse-markdown "```clojure\n(defn hello [] \"逆引き Clojure\")\n```"))))
-       (layout/main-layout req :content))
-  #_(->> (list
-          [:h1 "Welcome!!"]
-          [:ul
-           [:li [:a {:href "/recipe"} "逆引きレシピ一覧"]]])
-         html/html
-         (layout/main-layout req :content)))
+  (let [ex (html/content (uv/parse-markdown "```clojure\n(defn hello [] \"逆引き Clojure\")\n```"))]
+    (->> (-> (list
+              (top-contributors)
+              (resently-updated)
+              (how-to-write))
+             html/html
+             (html/transform [:main#markdown-ex] ex))
+         (layout/main-layout req :content))))
